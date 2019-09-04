@@ -1,9 +1,12 @@
-const express = 'express';
+const express = require('express')
 const userDB = require('./userDb')
+
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.use(express.json())
 
+router.post('/', (req, res) => {
+    
 });
 
 router.post('/:id/posts', (req, res) => {
@@ -11,7 +14,15 @@ router.post('/:id/posts', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-
+    userDB.get()
+        .then(response =>
+            {
+                res.status(200).json(response)
+            })
+        .catch(err =>
+            {
+                res.status(500).json({ errorMessage: 'there was an error trying to retrieve users', error: err })
+            })
 });
 
 router.get('/:id', (req, res) => {

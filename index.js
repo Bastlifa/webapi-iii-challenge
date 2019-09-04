@@ -14,14 +14,15 @@ function logger(req, res, next) {
     next()
 }
 
-
+server.get('/', (req, res) =>
+{
+    res.status(200).json({ message: "server is running" })
+})
 
 
 
 server.use(logger)
-server.use(validateUserID)
 
-const server = express()
 
 server.listen(5000, _ =>
 {
